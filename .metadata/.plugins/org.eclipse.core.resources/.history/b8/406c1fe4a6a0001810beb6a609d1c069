@@ -1,0 +1,34 @@
+package util;
+
+import java.util.*;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import model.imgModel;
+
+public class imgParse {
+	public List<imgModel> getData(String htmlSource){
+		List<imgModel> imgs = new ArrayList<>();
+		Document doc = Jsoup.parse(htmlSource);
+		System.out.println(doc); //check json file
+		
+		 Elements elements=doc.select("ul[class=gl-warp clearfix]").select("li[class=gl-item]");
+	        for (Element ele:elements) {
+	            String imgURL=ele.attr("data-sku");
+	            String imgName=ele.select("div[class=p-price]").select("strong").select("i").text();
+	            //String bookName=ele.select("div[class=p-name]").select("em").text();
+
+	            imgModel img=new imgModel();
+	            //对象的值
+	            img.setImgURL(imgURL);
+	            img.setImgName(imgName);
+	            //将每一个对象的值，保存到List集合中
+	            imgs.add(img);
+	        }
+		
+		return imgs;
+	}
+}

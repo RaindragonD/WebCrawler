@@ -1,0 +1,31 @@
+package store;
+
+import model.BaiduImgModel;
+import java.util.List;
+
+public class PreProcess {
+	public static List<BaiduImgModel> delRptImg(List<BaiduImgModel> imgs){
+		for (int i=0;i<imgs.size();i++) {
+			BaiduImgModel img = imgs.get(i);
+			String url = img.getImgURL();
+			for (int j=i+1;j<imgs.size();j++) {
+				BaiduImgModel img_temp = imgs.get(j);
+				String url_temp = img.getImgURL();
+				if (url_temp.equals(url)){
+					imgs.remove(img_temp);
+				}
+			}
+		}
+		return imgs;
+	}
+	
+	public static List<BaiduImgModel> modName(List<BaiduImgModel> imgs){ 
+		for (int i=0;i<imgs.size();i++) {
+			BaiduImgModel img = imgs.get(i);
+			String name = img.getImgName();
+			if (name =="") {name="Unnamed";}
+			name = (i+1)+name;
+		}
+		return imgs;
+	}
+}

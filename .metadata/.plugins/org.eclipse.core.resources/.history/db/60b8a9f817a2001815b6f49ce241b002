@@ -1,0 +1,22 @@
+package crawler.urlCrawler;
+
+import java.util.*;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+        String dir = "/Users/RaindragonD/Desktop/Java/Crawler/urlCrawler/url.txt";
+        int depth = 2;
+        String url = "http://www.sina.com.cn/";        
+        
+        ArrayList<String> urls = Util.getURLs(Util.getSource(url));
+        
+        //MyCrawler c = new MyCrawler(url,depth,dir);
+        //c.craw();
+    }
+}

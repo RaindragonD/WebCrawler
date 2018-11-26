@@ -1,0 +1,110 @@
+package util;
+
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+//import org.jsoup.nodes.Element;
+//import org.jsoup.select.Elements;
+
+import model.ImgModel;
+
+public class ImageParse {
+	
+	static String QUERY=null;
+	static String REGURL=null;	
+	static String REGNAME=null;
+	static int PAGE_SIZE=0;
+	String keyword;
+	int page;
+	
+	
+	
+	public static String getQUERY() {
+		return QUERY;
+	}
+
+	public static void setQUERY(String qUERY) {
+		QUERY = qUERY;
+	}
+
+	public static String getREGURL() {
+		return REGURL;
+	}
+
+	public static void setREGURL(String rEGURL) {
+		REGURL = rEGURL;
+	}
+
+	public static String getREGNAME() {
+		return REGNAME;
+	}
+
+	public static void setREGNAME(String rEGNAME) {
+		REGNAME = rEGNAME;
+	}
+
+	public static int getPAGE_SIZE() {
+		return PAGE_SIZE;
+	}
+
+	public static void setPAGE_SIZE(int pAGE_SIZE) {
+		PAGE_SIZE = pAGE_SIZE;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	public String generateQuery() {
+		return QUERY;
+	}
+	
+	public List<ImgModel> getData(String source){
+		List<ImgModel> imgs = new ArrayList<>();
+		Document doc = Jsoup.parse(source);
+		String stringSource = doc.toString();
+		System.out.println(doc); //check source file
+					
+		Pattern pattern = Pattern.compile(getREGURL());
+        Matcher m = pattern.matcher(stringSource);
+        ArrayList<String> urls = new ArrayList<String>();
+        while (m.find()) {
+        	String url = m.group().replaceAll(getREGURL(),"").trim();
+        	urls.add(url);
+        } 
+        
+        pattern = Pattern.compile(getREGNAME());
+        m = pattern.matcher(stringSource);
+        ArrayList<String> names = new ArrayList<String>();
+        while (m.find()) {
+        	String name = m.group().replaceAll(getREGNAME(),"").trim();
+        	names.add(name);
+        } 
+		
+        for (int i=0;i<urls.size();i++) {
+        	ImgModel img = new ImgModel();
+        	String url = urls.get(i);
+        	img.setImgURL(url);
+        	String name = names.get(i)+url.substring(url.lastIndexOf("."));
+        	img.setImgName(name);
+        	imgs.add(img);
+        }
+        
+		return imgs;
+	}
+}

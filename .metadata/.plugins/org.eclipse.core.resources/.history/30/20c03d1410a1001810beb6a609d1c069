@@ -1,0 +1,33 @@
+package util;
+
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import model.imgModel;
+
+public class imgParse {
+	public static List<imgModel> getData(String source){
+		List<imgModel> imgs = new ArrayList<>();
+		Document doc = Jsoup.parse(source);
+		
+		//System.out.println(doc); //check source file
+		
+		String reg = "objURL\":\"http://.+?\\.jpg";
+		Pattern pattern = Pattern.compile(reg);
+        Matcher m = pattern.matcher(xmlSource);
+        while (m.find()) {
+        	finalURL = m.group().substring(9);
+        	sop(keyword+picCount+++":"+finalURL);
+        	download(finalURL,tempPath);
+        	sop("             下载成功");
+        } 
+		
+		return imgs;
+	}
+}

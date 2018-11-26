@@ -1,0 +1,11 @@
+package util;
+
+import java.util.*;
+import model.imgModel;
+
+public class imgParse {
+	public List<imgModel> getData(String data){
+		List<imgModel> imgs = new ArrayList<>();
+		return imgs;
+	}
+}

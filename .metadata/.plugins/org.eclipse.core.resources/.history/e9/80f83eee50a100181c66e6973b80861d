@@ -1,0 +1,34 @@
+package util;
+
+import java.io.IOException;
+import java.util.*;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.util.EntityUtils;
+
+import model.imgModel;
+import util.imgParse;
+
+public class urlUtil {
+	public static List<imgModel> parseUrl(CloseableHttpClient client, String url) throws Exception{
+		List<imgModel> imgs = new ArrayList<imgModel>();
+		
+        try {
+            //执行get方法
+        	 HttpResponse response = HTTPUtils.getRawHtml(client, url);
+            int StatusCode = response.getStatusLine().getStatusCode();
+            //get entity if status code is 200
+            if(StatusCode == 200){
+                String entity = EntityUtils.toString (response.getEntity(),"utf-8");     
+                imgs = imgParse.getData(entity);
+                EntityUtils.consume(response.getEntity());
+            }else {
+                //else consume the entity
+                EntityUtils.consume(response.getEntity());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();}
+        return imgs;
+	}
+}

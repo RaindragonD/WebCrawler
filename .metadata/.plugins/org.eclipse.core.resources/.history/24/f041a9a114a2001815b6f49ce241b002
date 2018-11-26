@@ -1,0 +1,34 @@
+package crawler.urlCrawler;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+        String dir = "/Users/RaindragonD/Desktop/Java/Crawler/urlCrawler/url.txt";
+        int depth = 1;
+        String url = "http://www.sina.com.cn/";        
+        
+        MyCrawler c = new MyCrawler(url,depth,dir);
+        c.craw();
+        
+        PrintWriter pw = null;
+		//File fileDir = new File(dir);
+		//if(!fileDir.exists()) {fileDir.mkdirs();}
+		
+		try {
+			pw = new PrintWriter(new FileWriter(dir, true));
+			pw.println(url);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+}

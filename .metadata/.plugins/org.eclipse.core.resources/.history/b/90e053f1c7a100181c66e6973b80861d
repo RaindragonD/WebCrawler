@@ -1,0 +1,53 @@
+package util;
+
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+//import org.jsoup.nodes.Element;
+//import org.jsoup.select.Elements;
+
+import model.ImgModel;
+
+public class ImageParse {
+	
+	private static String regUrl = "objURL\":\"http://.+?\\.jpg";	
+	private static String regName = "</strong>.*\", \"bdSource";
+	
+	public static List<ImgModel> getData(String source){
+		List<ImgModel> imgs = new ArrayList<>();
+		Document doc = Jsoup.parse(source);
+		String stringSource = doc.toString();
+		System.out.println(doc); //check source file
+					
+		Pattern pattern = Pattern.compile(regUrl);
+        Matcher m = pattern.matcher(stringSource);
+        ArrayList<String> urls = new ArrayList<String>();
+        while (m.find()) {
+        	String url = m.group().replaceAll("objURL\":\"","").trim();
+        	urls.add(url);
+        } 
+        
+        reg = "</strong>.*\", \"bdSource";
+        pattern = Pattern.compile(reg);
+        m = pattern.matcher(stringSource);
+        ArrayList<String> names = new ArrayList<String>();
+        while (m.find()) {
+        	String name = m.group().replaceAll("</strong>","").replaceAll("\", \"bdSource","").trim();
+        	names.add(name);
+        } 
+		
+        for (int i=0;i<urls.size();i++) {
+        	ImgModel img = new ImgModel();
+        	String url = urls.get(i);
+        	img.setImgURL(url);
+        	String name = names.get(i)+url.substring(url.lastIndexOf("."));
+        	img.setImgName(name);
+        	imgs.add(img);
+        }
+        
+		return imgs;
+	}
+}

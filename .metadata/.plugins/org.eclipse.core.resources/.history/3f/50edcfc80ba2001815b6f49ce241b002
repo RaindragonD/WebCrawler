@@ -1,0 +1,39 @@
+package crawler.urlCrawler;
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class URLQueue {
+	
+	List<String> queue =new ArrayList<String>(); 
+	
+	public void enqueue(String newItem) {
+		queue.add(newItem);
+	}
+	
+	public String dequeue() {
+		String item=queue.get(0);
+		queue.remove(0);
+		return item;
+	}
+	
+	public int size() {
+		return queue.size();
+	}
+	
+	public String get(int pos) {
+		return queue.get(pos);
+	}
+	
+	public boolean hasNext() {
+		boolean hasNext = false;
+		if (queue.size()>0) {hasNext = true;}
+		return hasNext;
+	}
+	
+	public void pushList(ArrayList<String> items) {
+		for(int i=0;i<items.size();i++) {
+			queue.enqueue("");
+		}
+	}
+}

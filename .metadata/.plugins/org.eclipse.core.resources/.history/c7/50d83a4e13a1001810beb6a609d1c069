@@ -1,0 +1,33 @@
+package util;
+
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import model.imgModel;
+
+public class imgParse {
+	public static List<imgModel> getData(String source){
+		List<imgModel> imgs = new ArrayList<>();
+		Document doc = Jsoup.parse(source);
+		String stringSource = doc.toString();
+		//System.out.println(doc); //check source file
+		
+		String reg = "objURL\":\"http://.+?\\.jpg";
+		Pattern pattern = Pattern.compile(reg);
+        Matcher m = pattern.matcher(stringSource);
+        while (m.find()) {
+        	String url = m.group().replaceAll("objURL\":\"","").trim();
+        	imgModel img = new imgModel();
+        	img.setImgURL(url);
+        	img.
+        } 
+		
+		return imgs;
+	}
+}

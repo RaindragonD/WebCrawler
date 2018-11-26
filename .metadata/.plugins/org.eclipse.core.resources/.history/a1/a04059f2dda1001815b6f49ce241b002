@@ -1,0 +1,36 @@
+package crawler.urlCrawler;
+
+import java.io.BufferedReader;  
+import java.io.FileWriter;  
+import java.io.IOException;  
+import java.io.InputStreamReader;  
+import java.io.PrintWriter;  
+import java.net.MalformedURLException;  
+import java.net.URL;  
+import java.net.URLConnection;  
+import java.util.regex.Matcher;  
+import java.util.regex.Pattern;  
+  
+import crawler.urlCrawler.PreAnalyze;
+
+public class WebSpiderDemo {  
+    public static void main(String[] args) {  
+        String url = "http://www.sina.com.cn/";   
+        String source = PreAnalyze.getSource(url);;  
+        PrintWriter pw = null;  
+        String regex = "http://[\\w+\\.?/?]+\\.[A-Za-z]+";  
+        Pattern p = Pattern.compile(regex);  
+        try {  
+            pw = new PrintWriter(new FileWriter("/Users/RaindragonD/Desktop/Java/Crawler/urlCrawler/url.txt"), true);            
+            Matcher m =  p.matcher(source);
+            while (m.find()) {
+            	pw.println(m.group()); 
+            }
+            System.out.println("获取成功！");  
+        } catch (MalformedURLException e) {  
+            e.printStackTrace();  
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        } 
+    }  
+} 

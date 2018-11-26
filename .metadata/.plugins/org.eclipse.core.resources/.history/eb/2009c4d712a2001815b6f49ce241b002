@@ -1,0 +1,25 @@
+package crawler.urlCrawler;
+
+import java.util.ArrayList;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+        String dir = "/Users/RaindragonD/Desktop/Java/Crawler/urlCrawler/url.txt";
+        int depth = 2;
+        String site = "http://www.sina.com.cn/";
+        
+        ArrayList<String> urls = Util.getURLs(Util.getSource(site));
+        for (int i=0;i<urls.size();i++) {
+        	System.out.print(urls.get(i));
+        }
+        
+        MyCrawler c = new MyCrawler(site,depth,dir);
+        c.craw();
+    }
+}

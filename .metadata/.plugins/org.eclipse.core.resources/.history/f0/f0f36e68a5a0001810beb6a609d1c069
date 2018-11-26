@@ -1,0 +1,29 @@
+package util;
+
+import java.util.*;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import model.imgModel;
+
+public class imgParse {
+	public List<imgModel> getData(String htmlSource){
+		List<imgModel> imgs = new ArrayList<>();
+		Document doc = Jsoup.parse(htmlSource);
+		
+		Elements elements = doc.getElementsByTag("img");   
+        for(Element element : elements){
+            String imgSrc = element.attr("src");
+            if (!"".equals(imgSrc) && (imgSrc.startsWith("http://") || imgSrc.startsWith("https://"))) {
+                // 判断imgSrc是否为空且是否以"http://"开头
+                System.out.println("正在下载的图片的地址：" + imgSrc);
+                downImages(filePath, imgSrc);
+            }
+        }
+		
+		return imgs;
+	}
+}

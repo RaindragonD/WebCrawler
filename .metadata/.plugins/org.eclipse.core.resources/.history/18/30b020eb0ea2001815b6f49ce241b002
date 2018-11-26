@@ -1,0 +1,46 @@
+package crawler.urlCrawler;
+
+import java.util.ArrayList;
+
+public class MyCrawler {
+	private URLQueue readyQ = new URLQueue();
+	private URLQueue usedQ = new URLQueue();
+	private URLQueue waitQ = new URLQueue();
+	private int depth;
+
+	public MyCrawler(String[] startUrls, int depth) {
+		for(int i=0;i<startUrls.length;i++) {
+			readyQ.enqueue(startUrls[i]);
+			this.depth = depth;
+		}
+	}
+
+	public boolean exist(String item) {
+		boolean exist = false;
+		for(int i=0;i<usedQ.size();i++) {
+			String temp = usedQ.get(i);
+			if(temp.equals(item)) {exist=true;}
+		}
+		return exist;
+	}
+
+	public void craw() {
+		int currentDepth = 1;
+
+		if((readyQ.hasNext() || waitQ.hasNext())&&currentDepth<=depth) {
+			while (readyQ.hasNext()) {
+				String url = readyQ.dequeue();
+				if(!exist(url)) {
+					ArrayList<String> urls = Util.getURLs(Util.getSource(url));
+					waitQ.enqueueList(urls);					
+				}
+			}
+			while(waitQ.hasNext()) {
+				String newUrl = waitQ.dequeue();
+				readyQ.enqueue(newUrl);
+			}
+			currentDepth++;
+		}
+
+	}
+}

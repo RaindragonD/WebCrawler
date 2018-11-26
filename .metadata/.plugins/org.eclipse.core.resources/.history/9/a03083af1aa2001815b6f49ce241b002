@@ -1,0 +1,19 @@
+package crawler.urlCrawler;
+
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+	public static void main( String[] args )
+	{
+		String dir = "/Users/RaindragonD/Desktop/Java/Crawler/urlCrawler/url.txt";
+		int depth = 1;
+		String url = "http://www.sina.com.cn/";        
+		
+		MyCrawler c = new MyCrawler(url,depth,dir);
+		c.craw();
+	}
+}

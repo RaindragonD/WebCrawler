@@ -1,0 +1,5 @@
+INDEX VERSION 1.130+/Users/RaindragonD/Desktop/Java/Crawler/.metadata/.plugins/org.eclipse.jdt.core
+621520364.index
+2976735942.index
+1203929922.index
+1187982608.index

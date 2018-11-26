@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.jsoup.Jsoup"/>
+<fullyQualifiedTypeName name="util.httpUtil"/>
+<fullyQualifiedTypeName name="model.imgModel"/>
+<fullyQualifiedTypeName name="model.BaiduImgModel"/>
+<fullyQualifiedTypeName name="store.PreProcess"/>
+<fullyQualifiedTypeName name="store.SQLStorage"/>
+<fullyQualifiedTypeName name="model.ImgModel"/>
+<fullyQualifiedTypeName name="util.BaiduImgParse"/>
+<fullyQualifiedTypeName name="util.ImageParser"/>
+<fullyQualifiedTypeName name="util.GoogleImgParser"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+</qualifiedTypeNameHistroy>
